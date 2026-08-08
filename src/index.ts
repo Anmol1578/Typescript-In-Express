@@ -1,6 +1,7 @@
-
 // Import Express
 import express from "express";
+
+import { pets } from "./data/pets.js";
 
 // Import Express type
 import type { Express } from "express";
@@ -11,29 +12,6 @@ const PORT = 8000;
 // Create Express app
 const app: Express = express();
 
-// Create a type for a pet
-type Pet = {
-  name: string;
-  species: string;
-  adopted: boolean;
-  age: number;
-};
-
-// Create a list of pets
-const pets: Pet[] = [
-  {
-    name: "Max",
-    species: "Dog",
-    adopted: true,
-    age: 3
-  },
-  {
-    name: "Meow",
-    species: "Cat",
-    adopted: false,
-    age: 2
-  }
-];
 
 // GET route for the home page
 app.get("/", (req, res) => {
