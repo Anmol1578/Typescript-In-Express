@@ -1,5 +1,5 @@
 // Create a type for a pet
-type Pet = {
+export type Pet = {
   name: string;
   species: string;
   adopted: boolean;
