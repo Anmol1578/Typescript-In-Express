@@ -1,5 +1,6 @@
 // Create a type for a pet
 export type Pet = {
+  id: number;
   name: string;
   species: string;
   adopted: boolean;
@@ -15,6 +16,7 @@ export type Pet = {
 // Create a list of pets
 export const pets: Pet[] = [
   {
+    id: 1,
     name: "Max",
     species: "Dog",
     adopted: true,
@@ -27,6 +29,7 @@ export const pets: Pet[] = [
     }
   },
   {
+    id: 2,
     name: "Meow",
     species: "Cat",
     adopted: false,
