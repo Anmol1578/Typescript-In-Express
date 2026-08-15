@@ -20,8 +20,9 @@ app.use(cors());
 
 type PetQueryParams = {
   species?:string,
-  adopted?: "true" | "false";
-  
+  adopted?: "true" | "false",
+  minAge?:string,
+  maxAge?:string
 }
 
 // GET route for the home page
@@ -31,7 +32,7 @@ app.get(
   req: Request<{}, {}, {}, PetQueryParams>,
     res: Response<Pet[]>,
   ): void => {
-    const { species , adopted } = req.query;
+    const { species , adopted , minAge , maxAge } = req.query;
 
     let filteredPets: Pet[] = pets;
 
@@ -46,6 +47,20 @@ app.get(
       filteredPets = filteredPets.filter(
         (pet: Pet): boolean =>
          pet.adopted === JSON.parse(adopted)
+      );
+    }
+
+          if (minAge) {
+      filteredPets = filteredPets.filter(
+        (pet: Pet): boolean =>
+         pet.age >= JSON.parse(minAge)
+      );
+    }
+
+         if (maxAge) {
+      filteredPets = filteredPets.filter(
+        (pet: Pet): boolean =>
+         pet.age <= JSON.parse(maxAge)
       );
     }
 
