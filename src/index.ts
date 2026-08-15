@@ -8,7 +8,6 @@ import petRouter from "./routes/pets.routes.js";
 
 import cors from "cors";
 
-// Port number for the server
 const PORT = 8000;
 
 // Create Express app
@@ -24,6 +23,7 @@ app.use((req: Request, res: Response<{ message: string }>): void => {
 
 // Start the server
 app.listen(PORT, (): void => {
-  // Show message when server starts
+
+
   console.log(`Server is Listening on port ${PORT}`);
 });
