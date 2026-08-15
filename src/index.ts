@@ -18,11 +18,40 @@ const app: Express = express();
 
 app.use(cors());
 
+type PetQueryParams = {
+  species?:string,
+  adopted?: "true" | "false";
+  
+}
+
 // GET route for the home page
-app.get("/", (req: Request, res: Response<Pet[]>): void => {
-  // Send pets as JSON
-  res.json(pets);
-});
+app.get(
+  "/",
+  (
+  req: Request<{}, {}, {}, PetQueryParams>,
+    res: Response<Pet[]>,
+  ): void => {
+    const { species , adopted } = req.query;
+
+    let filteredPets: Pet[] = pets;
+
+    if (species) {
+      filteredPets = filteredPets.filter(
+        (pet: Pet): boolean =>
+          pet.species.toLowerCase() === species.toLowerCase(),
+      );
+    }
+
+       if (adopted) {
+      filteredPets = filteredPets.filter(
+        (pet: Pet): boolean =>
+         pet.adopted === JSON.parse(adopted)
+      );
+    }
+
+    res.json(filteredPets);
+  },
+);
 
 app.get(
   "/:id",
